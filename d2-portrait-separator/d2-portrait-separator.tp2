@@ -1,0 +1,89 @@
+BACKUP ~d2-portrait-separator/backup~
+AUTHOR ~Dan_P~
+VERSION ~1.0~
+
+LANGUAGE ~English~
+         ~english~
+         ~d2-portrait-separator/tra/english/setup.tra~
+		 
+		 
+//Makes it so that portraits will only appear in male or female lists
+//portraits can be in the mod folder or in the normal portraits folder
+
+BEGIN @1
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ @2
+LABEL ~D2-PORTRAIT-SEPARATOR~
+
+
+COPY ~%MOD_FOLDER%/M_d2port.lua~ ~override~
+
+////////////////////////////////////////////////////////////
+
+//check Portraits folder
+
+ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~f.*L.bmp~ BEGIN
+  APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 2)~
+END
+  
+ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~m.*L.bmp~ BEGIN
+  APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
+END
+
+ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~f.*.bmp~ BEGIN
+  COPY ~%BASH_FOR_FILESPEC%~ ~override~
+END
+
+ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~m.*.bmp~ BEGIN
+  COPY ~%BASH_FOR_FILESPEC%~ ~override~
+END
+
+////////////////////////////////////////////////////////////
+
+//check IWDEE subfolders
+
+ACTION_IF (GAME_IS ~iwdee~) BEGIN  
+  COPY ~%MOD_FOLDER%/iwdee(f)~ ~override~
+  COPY ~%MOD_FOLDER%/iwdee(m)~ ~override~
+  
+  ACTION_BASH_FOR ~%MOD_FOLDER%/iwdee(f)~ ~.*L.bmp~ BEGIN
+    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+      APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 2)~
+    END
+  END
+  
+  ACTION_BASH_FOR ~%MOD_FOLDER%/iwdee(m)~ ~.*L.bmp~ BEGIN
+    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+      APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
+    END
+  END
+END
+
+////////////////////////////////////////////////////////////
+
+//check BGEE subfolders
+
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+  COPY ~%MOD_FOLDER%/bgee(f)~ ~override~
+  COPY ~%MOD_FOLDER%/bgee(m)~ ~override~
+  
+  ACTION_BASH_FOR ~%MOD_FOLDER%/bgee(f)~ ~.*L.bmp~ BEGIN
+    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+      APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 2)~
+    END
+  END
+  
+  ACTION_BASH_FOR ~%MOD_FOLDER%/bgee(m)~ ~.*L.bmp~ BEGIN
+    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+      APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
+    END
+  END
+END
+
+////////////////////////////////////////////////////////////
+  
+COPY_EXISTING ~M_d2port.lua~ ~override~
+  REPLACE_TEXTUALLY ~L'~ ~'~
+BUT_ONLY
+
+PRINT @3    // reminder to remove files from the Portraits folder beginning in M or F
+PRINT @4

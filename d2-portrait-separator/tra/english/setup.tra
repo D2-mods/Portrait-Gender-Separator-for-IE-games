@@ -1,0 +1,7 @@
+//Setup
+@1 = ~Portrait Gender Separator~
+@2 = ~This mod is for the EE versions~
+@3 = ~NOTE: Portraits have been copied to the override.
+Please archive, move, or delete any portraits starting with the letters M or F in the regular Portraits folder.~
+@4 = ~The portraits in this folder and in the .LUA file are part of separate lists.
+Both will appear when clicking through the portraits in-game if both exist.~
