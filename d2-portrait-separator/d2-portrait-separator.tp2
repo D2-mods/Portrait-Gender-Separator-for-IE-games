@@ -1,6 +1,6 @@
 BACKUP ~d2-portrait-separator/backup~
 AUTHOR ~Dan_P~
-VERSION ~1.1~
+VERSION ~1.2~
 
 LANGUAGE ~English~
          ~english~
@@ -80,10 +80,6 @@ ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
 END
 
 ////////////////////////////////////////////////////////////
-  
-COPY_EXISTING ~M_d2port.lua~ ~override~
-  REPLACE_TEXTUALLY ~L'~ ~'~
-BUT_ONLY
 
 PRINT @3    // reminder to remove files from the Portraits folder beginning in M or F
 PRINT @4

@@ -5,12 +5,6 @@ Adds your portraits to the male or female portrait lists, appearing after the of
 
 Usage is really simple. Just put your portraits either in the regular Portraits folder or in one of the subfolders in the mod folder. Then run the installer. Files are copied to the override and filenames are grabbed for the M_*.lua file.
 
-#### Portraits files:
-- should be 7 characters or less
-- you need files ending in L and M (possibly S but needs confirming)
-- images can be identical dimensions (game will scale down)
-- the M file is needed because the L file doesn't seem to get used for smaller sizes when added by a .lua file
-
 #### Mod folder
 - all portraits in the (f) folder are added to the female list
 - all portraits in the (m) folder are added to the male list
