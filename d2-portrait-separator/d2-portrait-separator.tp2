@@ -7,8 +7,8 @@ LANGUAGE ~English~
          ~d2-portrait-separator/tra/english/setup.tra~
 		 
 		 
-//Makes it so that portraits will only appear in male or female lists
-//portraits can be in the mod folder or in the normal portraits folder
+//makes it so that portraits will only appear in male or female lists
+//portraits can be in the mod folder or in the regular Portraits folder
 
 BEGIN @1
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ @2
