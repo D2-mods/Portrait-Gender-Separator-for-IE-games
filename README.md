@@ -1,5 +1,6 @@
 # Portrait Gender Separator (for Infinity Engine games)
-Installs on: BG:EE, BG2:EE, IWD:EE, and EET. 
+Download: https://github.com/D2-mods/Portrait-Gender-Separator-for-IE-games/releases  
+Installs on: BG:EE, BG2:EE, IWD:EE, EET (tested on v2.5/v2.6)
 
 Adds your portraits to the male or female portrait lists, appearing after the official portraits. Will scan portraits from inside the mod folder, as well as from the regular Portaits folders for each game.
 
