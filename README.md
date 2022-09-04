@@ -21,3 +21,11 @@ NOTE:
 I'd recommend to archive, move, or delete files beginning in M or F from the Portraits folder after install.
 The portraits in this folder and from the .lua file are part of separate lists.
 Both will appear when clicking through the portraits in the game if both exist.
+
+#### Portrait Selector compatibility:
+- compatible
+	- Dragonspear UI++ portrait picker
+	- BillyYank's Multi-Portrait
+	- lefreut's Portrait Picker (selection screen will only show the small portraits if you have a file ending in M, but the actual game screens will scale down the L-size if you don't have one)
+- not compatible
+	- Mr2150's Portrait Picker

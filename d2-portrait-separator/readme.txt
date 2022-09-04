@@ -36,6 +36,7 @@ Additional info:
 - lines will not be duplicated in the .lua file if a portrait is found multiple times
 
 Updates:
+v1.4 - changed backup folder to weidu_external
 v1.3 - minor update, just tightens up some things during install
 v1.2 - fixed smaller portraits not appearing if you didn't have a file ending in M
 v1.1 - added missing folders
