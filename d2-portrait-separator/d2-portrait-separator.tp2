@@ -1,19 +1,34 @@
 BACKUP ~weidu_external/backup/d2-portrait-separator~
 AUTHOR ~Dan_P~
-VERSION ~1.4~
+VERSION ~1.5~
+
 
 LANGUAGE ~English~
          ~english~
          ~d2-portrait-separator/tra/english/setup.tra~
-		 
-		 
-//makes it so that portraits will only appear in male or female lists
-//portraits can be in the mod folder or in the regular Portraits folder
+
+
+//Portrait Gender Separator
 
 BEGIN @1
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee eet~ @2
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) ~Game not supported~
 LABEL ~D2-PORTRAIT-SEPARATOR~
 
+
+////////////////////////////////////////////////////////////
+
+//Prep
+
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+  OUTER_TEXT_SPRINT game ~iwdee~    // IWDEE
+END
+ELSE BEGIN
+  OUTER_TEXT_SPRINT game ~bgee~     // BG games
+END
+
+OUTER_TEXT_SPRINT female     ~%MOD_FOLDER%/%game%(f)~
+OUTER_TEXT_SPRINT male       ~%MOD_FOLDER%/%game%(m)~
+OUTER_TEXT_SPRINT portraits  ~%USER_DIRECTORY%/portraits~
 
 COPY ~%MOD_FOLDER%/M_d2port.lua~ ~override~
 
@@ -21,75 +36,47 @@ COPY ~%MOD_FOLDER%/M_d2port.lua~ ~override~
 
 //check Portraits folder
 
-ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~f.*L.bmp~ BEGIN
-  APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 2)~
-END
-  
-ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~m.*L.bmp~ BEGIN
-  APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
-END
-
-ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~f.*.bmp~ BEGIN
-  COPY ~%BASH_FOR_FILESPEC%~ ~override~
-END
-
-ACTION_BASH_FOR ~%USER_DIRECTORY%/portraits/~ ~m.*.bmp~ BEGIN
-  COPY ~%BASH_FOR_FILESPEC%~ ~override~
-END
-
-////////////////////////////////////////////////////////////
-
-//check IWDEE subfolders
-
-ACTION_IF (GAME_IS ~iwdee~) BEGIN    
-  ACTION_BASH_FOR ~%MOD_FOLDER%/iwdee(f)~ ~.*L.bmp~ BEGIN
-    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+ACTION_BASH_FOR ~%portraits%~ ~f.*\.bmp~ BEGIN
+  ACTION_IF !(FILE_EXISTS ~%female%/%BASH_FOR_FILE%~) BEGIN
+    ACTION_IF !(~%BASH_FOR_FILE%~ STRING_MATCHES_REGEXP ~.*L\.bmp~) BEGIN
       APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 2)~
     END
-  END
-  
-  ACTION_BASH_FOR ~%MOD_FOLDER%/iwdee(m)~ ~.*L.bmp~ BEGIN
-    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
-      APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
-    END
-  END
-  
-  ACTION_BASH_FOR ~%MOD_FOLDER%/iwdee(f)~ ~.*.bmp~ BEGIN
     COPY ~%BASH_FOR_FILESPEC%~ ~override~
   END
-  
-  ACTION_BASH_FOR ~%MOD_FOLDER%/iwdee(m)~ ~.*.bmp~ BEGIN
+END
+
+ACTION_BASH_FOR ~%portraits%~ ~m.*\.bmp~ BEGIN
+  ACTION_IF !(FILE_EXISTS ~%male%/%BASH_FOR_FILE%~) BEGIN
+    ACTION_IF !(~%BASH_FOR_FILE%~ STRING_MATCHES_REGEXP ~.*L\.bmp~) BEGIN
+      APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
+    END
     COPY ~%BASH_FOR_FILESPEC%~ ~override~
   END
 END
 
 ////////////////////////////////////////////////////////////
 
-//check BGEE subfolders
-
-ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
-  ACTION_BASH_FOR ~%MOD_FOLDER%/bgee(f)~ ~.*L.bmp~ BEGIN
-    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+//check mod folders
+  
+  ACTION_BASH_FOR ~%female%~ ~.*\.bmp~ BEGIN
+    ACTION_IF !(~%BASH_FOR_FILE%~ STRING_MATCHES_REGEXP ~.*L\.bmp~) BEGIN
       APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 2)~
     END
+    COPY ~%BASH_FOR_FILESPEC%~ ~override~
   END
   
-  ACTION_BASH_FOR ~%MOD_FOLDER%/bgee(m)~ ~.*L.bmp~ BEGIN
-    ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/portraits/%BASH_FOR_FILE%~) BEGIN
+  ACTION_BASH_FOR ~%male%~ ~.*\.bmp~ BEGIN
+    ACTION_IF !(~%BASH_FOR_FILE%~ STRING_MATCHES_REGEXP ~.*L\.bmp~) BEGIN
       APPEND ~M_d2port.lua~ ~addPortrait('%BASH_FOR_RES%', 1)~
     END
-  END
-  
-  ACTION_BASH_FOR ~%MOD_FOLDER%/bgee(f)~ ~.*.bmp~ BEGIN
     COPY ~%BASH_FOR_FILESPEC%~ ~override~
   END
-  
-  ACTION_BASH_FOR ~%MOD_FOLDER%/bgee(m)~ ~.*.bmp~ BEGIN
-    COPY ~%BASH_FOR_FILESPEC%~ ~override~
-  END
-END
 
 ////////////////////////////////////////////////////////////
 
 PRINT @3    // reminder to remove files from the Portraits folder beginning in M or F
 PRINT @4
+
+
+/*
+*/
