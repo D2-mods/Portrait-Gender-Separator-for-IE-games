@@ -11,8 +11,6 @@ Files are copied to the override and filenames are grabbed for the M_\*.lua file
 
 See bottom for compatibility info. This mod needs to be installed after Infinity UI++, if using.
 
-> Portrait limit: There seems to be hard limit to the number of portraits that can be added through the UI, including base game portraits. Past the limit, portraits will appear as a black box. I don't know the exact number. I have no issues with around 350 custom portraits in IWDEE.
-
 --
 
 #### Mod folder:
@@ -26,6 +24,11 @@ See bottom for compatibility info. This mod needs to be installed after Infinity
 - Filenames starting with M will be added to the male list.
 
 > Note: After install, any portraits starting with M or F should be moved/deleted from the regular Portraits folder. The portraits in this folder and from the .lua file are part of separate lists. Both will appear when clicking through the portraits in the game if both exist.
+
+--
+
+#### Portrait limit:
+There seems to be hard limit to the number of portraits that can be added through the UI, including base game portraits. Past the limit, portraits will appear as a black box. I don't know the exact number. I have no issues with around 350 custom portraits in IWDEE.
 
 --
 
