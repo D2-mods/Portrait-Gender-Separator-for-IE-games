@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/d2-portrait-separator~
 AUTHOR ~Dan_P~
-VERSION ~1.7~
+VERSION ~1.8~
 
 
 LANGUAGE ~English~
@@ -11,7 +11,9 @@ LANGUAGE ~English~
 //Portrait Gender Separator
 
 BEGIN @1
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) ~Game not supported~
+REQUIRE_PREDICATE (FILE_EXISTS ~engine.lua~) ~Game not supported~
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~ui.menu~) ~Game not supported~
+REQUIRE_PREDICATE !(GAME_IS ~pstee~) ~Game not supported~
 LABEL ~D2-PORTRAIT-SEPARATOR~
 
 

@@ -1,6 +1,6 @@
 Portrait Gender Separator
 GitHub: https://github.com/D2-mods/Portrait-Gender-Separator-for-IE-games
-Installs on: BG:EE, BG2:EE, IWD:EE, EET (tested on v2.5/v2.6)
+Installs on: BG:EE, BG2:EE, IWD:EE, EET (tested on v2.5/v2.6/v2.7)
 
 
 Info:
@@ -27,21 +27,18 @@ Mod folder:
 Portraits folder:
 - Filenames starting in F will be added to the female list (does not need to be capitalized).
 - Filenames starting in M will be added to the male list.
-- Files are copied to the override, where they are only selectable if added by a .lua file.
-
-More info: 
-- After install, any portraits starting in M or F should be moved/deleted from the Portraits folder.
-- The portraits in this folder and from the .lua file are part of separate lists.
-- Both will appear when clicking through the portraits in the game if both exist.
+- After install, any portraits starting with M or F should be moved/deleted from the regular Portraits folder. The portraits in this folder and from the .lua file are part of separate lists. Both will appear when clicking through the portraits in the game if both exist.
 
 --
 
 Notes:
-- The mod folder has priority if there are different portraits with the same filename.
-- Lines will not be duplicated in the .lua file if a portrait is found multiple times.
+- The mod folder has priority over the portraits folder if there are different portraits with the same filename.
+- Lines will not be duplicated in the .lua file if a portrait is found multiple times (i.e. in both the mod folder and the portraits folder).
 
+--
 
 Updates:
+v1.8 - install is now skipped on pre-v2.0 EEs (different portraits selection)
 v1.7 - now compatible with Infinity UI++ (tested with v0.64 Beta)
 v1.6 - LUA function is written inlined, then copied to override
 v1.5 - Rewrote the installer. It's more efficient + closed one potential (though unlikely) issue.
